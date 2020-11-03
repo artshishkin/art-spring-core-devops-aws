@@ -1,11 +1,14 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/art_aws_study?serverTimezone=UTC&useSSL=false
-    username: art_user
-    password: art_pass
+#    username: art_user
+#    password: art_pass
 #    username: root
 #    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: validate
+jasypt:
+  encryptor:
+    password: jasypt_password

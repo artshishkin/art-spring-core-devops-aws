@@ -26,6 +26,13 @@ Through MySQLShell (tested on Windows)
 CREATE DATABASE art_aws_study;
 ```
 
+#####  30. Encrypting Properties
+
+1.  to encode `username` and `password` use `utils/jasypt-1.9.2/bin`
+    -  `encrypt input=art_user password=jasypt_password`
+    -  `encrypt input=art_pass password=jasypt_password`
+2.  or use online Jasypt encoder
+    -  [jasypt-online-encryption](https://www.devglan.com/online-tools/jasypt-online-encryption-decryption) 
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
