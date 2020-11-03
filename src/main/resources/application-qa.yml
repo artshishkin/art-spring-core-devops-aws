@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/art_aws_study?serverTimezone=UTC&useSSL=false
-#    username: art_user
-#    password: art_pass
+    username: ENC(2C6EXm7C5V1QK1KBpC4gbJq/JzEqGLQ4)
+    password: ENC(3A6VM/468ZpB4+RYnCkCHczUSQkDfCAs)
 #    username: root
 #    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
