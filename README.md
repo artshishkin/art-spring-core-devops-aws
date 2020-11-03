@@ -25,6 +25,10 @@ Through MySQLShell (tested on Windows)
 ```mysql
 CREATE DATABASE art_aws_study;
 ```
+or
+```mysql
+CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
+```
 
 #####  30. Encrypting Properties
 
