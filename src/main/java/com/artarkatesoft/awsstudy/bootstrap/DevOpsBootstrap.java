@@ -40,6 +40,7 @@ public class DevOpsBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        if (authorRepository.count() > 0) return;
         Author jt = new Author();
         jt.setFirstName("John");
         jt.setLastName("Thompson");
