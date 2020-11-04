@@ -221,7 +221,10 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 -  Poll SCM
     -  Schedule  `H/5 * * * *` - every 5 min            
         
+#####  50. GitHub WebHooks
 
+-  github -> Settings -> Webhooks -> Add webhook -> Payload url:
+-  `http://jenkins.shyshkin.net/github-webhook/`
 
 
 
