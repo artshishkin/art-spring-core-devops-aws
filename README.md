@@ -169,7 +169,25 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 -  copy content of public key into 
 -  GitHub -> repo-> Settings -> Deploy Keys -> Add deploy key
 
+#####  45. Installing Git on Jenkins Server
 
+-  `sudo yum install git`
+
+#####  46. Configuring Jenkins Credentials
+
+-  go to `jenkins.shyshkin.net` -> 
+    -  login -> 
+    -  Manage Jenkins -> 
+    -  Manage Credentials -> 
+    -  Jenkins -> 
+    -  Global credentials ->
+    -  Add credentials ->
+        -  Kind:  SSH Username with private key
+        -  Private key:  From the Jenkins master ~/.ssh (old version, now absent)
+        -  Description: Jenkins SSH Keys
+        -  ID: <empty>
+        -  Passphrase: <empty>
+        
 
 
 
