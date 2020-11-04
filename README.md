@@ -93,8 +93,16 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 -  Save and Flush
 -  http://ec2-13-49-229-141.eu-north-1.compute.amazonaws.com:8080/
 
+#####  38. How DNS Works
 
+-  `nslookup cam-video-server.herokuapp.com` - to use default dns server
+-  `nslookup cam-video-server.herokuapp.com 8.8.8.8` - to use dns.google server
 
+#####  39. Using Route 53
+
+-  registered new domain name `shyshkin.net`
+-  created record (set) `jenkins.shyshkin.net`
+-  go to `jenkins.shyshkin.net:8080`
 
 
 
