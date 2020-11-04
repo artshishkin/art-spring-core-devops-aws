@@ -164,6 +164,10 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
     -  `id_rsa.pub` - public key
 -  `vi id_rsa.pub` 
 
+#####  44. Configuring GitHub with SSH Keys
+
+-  copy content of public key into 
+-  GitHub -> repo-> Settings -> Deploy Keys -> Add deploy key
 
 
 
