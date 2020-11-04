@@ -145,6 +145,27 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 -  Esc `:wq`
 -  `service jenkins restart`
 
+#####  42. Creating SSH Keys
+
+-  `whoami` - root))
+-  `ps -ef | grep jenkins` - look Jenkins creates user `jenkins` with certain privileges
+-  `su -s /bin/bash jenkins`
+-  `whoami`  - jenkins;)
+-  `pwd` - /etc/sysconfig
+-  `cd` without params - to the user's default dir - `pwd` - `/var/lib/jenkins`
+-  `mkdir .ssh`
+-  `cd .ssh/`
+-  generate key pair
+-  `ssh-keygen -t rsa -C 'jenkins@example.com'`
+-  `Enter file in which to save the key (/var/lib/jenkins/.ssh/id_rsa):` - Enter
+-  `Enter passphrase (empty for no passphrase):` - Enter (leave blank)
+-  `ls -ltr`
+    -  `id_rsa` - private key
+    -  `id_rsa.pub` - public key
+-  `vi id_rsa.pub` 
+
+
+
 
 
 
