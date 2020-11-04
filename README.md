@@ -104,6 +104,46 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 -  created record (set) `jenkins.shyshkin.net`
 -  go to `jenkins.shyshkin.net:8080`
 
+#####  40. Setting up Apache with Jenkins
+
+-  `ssh -i C:\Users\Admin\Downloads\dev_ops_course.pem ec2-user@jenkins.shyshkin.net`
+-  `sudo su`
+-  `yum install httpd`
+-  `service httpd start`
+-  `cd /etc/httpd/conf`
+-  `vi httpd.conf`
+-  [How to Install Jenkins Automation Server with Apache](https://www.howtoforge.com/tutorial/ubuntu-jenkins-automation-server/?__cf_chl_captcha_tk__=deab980ff85ac8f2804ebfd86af275c98635a0ce-1604502968-0-AY5COBD6-PLLrU6l9be5SXKOK3gf8mRj6C1dTz0oaeDcVT9o4BPSIbIcOsUhuoxyolRW7IZ73D7sPyTCOZV0rjgdRLNVOL1HXGEUZOfpLkXkU7Bjm_kAg_ad3d22ERAHCZ_PYzBcaduklXJT0Ijqqu7JTR7LlvN45eeIH9pIglhq43M7jH50F7SVWb9OGHJ2hHd4UzF-mVMOL55L5LB5NuT5yG50EnUNhgfXRXOutAK3OU2-pHdYV9B4lNiJxqr4FhRZoza9yr4PHG_umCCjh21nxU20hBedz-bTCVwUlIm_y8j16tzI5202juOBqmDfaJ5BV9BzjsLXICNUSWDu6O3R8vYznMDQI5cZRngN8T6obtibse-k0W1dPEVNqtgNIonn25nDObkNjLu7WPmK7vCz2jsp7WIKHiOXRYjLrOw_PptIJOOHLo4s-grsu0CGyPfHwbyBjQFIeDAu2gcFQ4aNRU8EQoVDPxwkrzEk3LSwYOh3rVNA0wVQFwevWIbda0IBq6lYs9wf5wPtoCJl05BR_UoAYd4fkpNXYiKT7dgX)
+-  add config
+```
+<Virtualhost *:80>
+    ServerName        jenkins.shyshkin.net
+    ProxyRequests     Off
+    ProxyPreserveHost On
+    AllowEncodedSlashes NoDecode
+ 
+    <Proxy http://localhost:8080/>
+      Order deny,allow
+      Allow from all
+    </Proxy>
+ 
+    ProxyPass         /  http://localhost:8080/ nocanon
+    ProxyPassReverse  /  http://localhost:8080/
+    ProxyPassReverse  /  http://jenkins.shyshkin.net/
+</Virtualhost>
+```
+-  Esc `:wq` - write and quit from vi
+-  `service httpd restart`
+-  now if you go to `http://jenkins.shyshkin.net/` you will see `Service Unavailable`
+-  security does not allow
+-  `setsebool -P httpd_can_network_connect true` - allows
+-  now we need to block 8080
+-  go to `/etc/sysconfig`
+-  `ls -ltr`
+-  `vi jenkins`
+-  `i` - insert mode
+-  change `JENKINS_LISTEN_ADDRESS` to `127.0.0.1`
+-  Esc `:wq`
+-  `service jenkins restart`
 
 
 
