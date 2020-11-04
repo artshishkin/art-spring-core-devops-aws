@@ -196,6 +196,25 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
     -  Global Tool Configuration ->
     -  Maven: set name `Maven 3.6.3`
     -  Apply -> Save
+    
+#####  48. Configuring Jenkins Maven Build
+
+-  new Item (new Job)
+-  Spring DevOps Project
+-  FreeStyle Project ->
+    -  GitHub project
+        -  paste URL
+    -  Source Code Management
+        -  Git
+            -  ~~Clone -> SSH copy~~ (does not work) 
+            -  ~~`git@github.com:artshishkin/art-spring-core-devops-aws.git`~~ (does not work)
+            -  `https://github.com/artshishkin/art-spring-core-devops-aws`
+    -  Build Triggers
+        -  GitHub hook trigger for GITScm polling
+    -  Build
+        -  Invoke top-level Maven targets
+            -  Maven Version:  Maven 3.6.3
+            -  Goals:  clean install
         
 
 
