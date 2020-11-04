@@ -188,6 +188,15 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
         -  ID: <empty>
         -  Passphrase: <empty>
         
+#####  47. Configuring Maven on Jenkins
+
+-  go to `jenkins.shyshkin.net` -> 
+    -  login ->
+    -  Manage Jenkins ->
+    -  Global Tool Configuration ->
+    -  Maven: set name `Maven 3.6.3`
+    -  Apply -> Save
+        
 
 
 
