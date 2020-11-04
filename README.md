@@ -215,6 +215,11 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
         -  Invoke top-level Maven targets
             -  Maven Version:  Maven 3.6.3
             -  Goals:  clean install
+            
+#####  49. Triggering a Jenkins Build
+
+-  Poll SCM
+    -  Schedule  `H/5 * * * *` - every 5 min            
         
 
 
