@@ -274,6 +274,33 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 -  Need to update AWS Instance type of Jenkins from `t3.micro` to `t3.small`
 -  Need to update AWS Instance type of Artifactory `t3.micro` to `t3.small`
  
+#####  58. Assignment - Configure Virtual Host for Artifactory
+
+-  `sudo su`
+-  `yum install httpd`
+-  `service httpd start`
+-  `cd /etc/httpd/conf`
+-  `vi httpd.conf`
+-  add config
+```
+<Virtualhost *:80>
+    ServerName        jenkins.shyshkin.net
+    ProxyRequests     Off
+    ProxyPreserveHost On
+    AllowEncodedSlashes NoDecode
+ 
+    <Proxy http://localhost:8082/>
+      Order deny,allow
+      Allow from all
+    </Proxy>
+ 
+    ProxyPass         /  http://localhost:8082/ nocanon
+    ProxyPassReverse  /  http://localhost:8082/
+    ProxyPassReverse  /  http://artifactory.shyshkin.net/
+</Virtualhost>
+```
+-  Esc `:wq` - write and quit from vi
+-  `service httpd restart`
 
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
