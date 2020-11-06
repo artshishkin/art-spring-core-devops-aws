@@ -250,8 +250,30 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 -  `docker info`
 -  `docker run --rm hello-world` - run and remove image after - just test everything is fine
 
+#####  57. Running Artifactory Image
 
+-  [Docker Installation](https://www.jfrog.com/confluence/display/JFROG/Installing+Artifactory#InstallingArtifactory-DockerInstallation)
+-  create jfrog home directory
+    -  `mkdir /var/opt/jfrog/`
+-  `export JFROG_HOME=/var/opt/jfrog`
 
+-  Create your Artifactory home directory and an empty system.yaml file. (Note: the user creating the folder should be the user running docker run.)
+    -  `mkdir -p $JFROG_HOME/artifactory/var/etc/` - (~~Windows: `mkdir $Env:JFROG_HOME/artifactory/var/etc/`~~ Does not work for me on Windows)
+    -  `cd $JFROG_HOME/artifactory/var/etc/`
+    -  `touch ./system.yaml`
+    -  `chown -R 1030:1030 $JFROG_HOME/artifactory/var`
+    -  `chmod -R 777 $JFROG_HOME/artifactory/var`
+-  Start the Artifactory container
+    -  `docker run --name artifactory -v $JFROG_HOME/artifactory/var/:/var/opt/jfrog/artifactory -d -p 8081:8081 -p 8082:8082 docker.bintray.io/jfrog/artifactory-oss:latest`
+    -  (SFG implementation:)
+    -  `sudo docker run -d --name jfrog_container -p 8081:8081 \
+        -v /var/opt/jfrog/artifactory/data:/var/opt/jfrog/artifactory/data \
+        -v /var/opt/jfrog/artifactory/logs:/var/opt/jfrog/artifactory/logs \
+        -v /var/opt/jfrog/artifactory/etc:/var/opt/jfrog/artifactory/etc \
+        docker.bintray.io/jfrog/artifactory-oss:latest`
+-  Need to update AWS Instance type of Jenkins from `t3.micro` to `t3.small`
+-  Need to update AWS Instance type of Artifactory `t3.micro` to `t3.small`
+ 
 
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
