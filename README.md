@@ -44,6 +44,10 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 
 -  create a new key pair `dev_ops_course`
 -  `dev_ops_course.pem` will be created
+-  add security groups
+    -  EC2 -> Security Groups -> something like that `sg-0c084e9a21817650e - launch-wizard-2` -> Edit inbound rules
+    - add HTTP
+    - add Custom TCP : 8080
 
 #####  37. Installing Jenkins
 
@@ -225,6 +229,27 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 
 -  github -> Settings -> Webhooks -> Add webhook -> Payload url:
 -  `http://jenkins.shyshkin.net/github-webhook/`
+
+
+####  Section 6: Setting up Artifactory
+
+#####  52. Introduction to Artifactory
+
+#####  53. Assignment: Create Artifactory Server
+
+#####  56. Installing Docker
+
+-  `uname -r`
+-  `yum update`
+-  [Installing Docker on Amazon Linux 2](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html)
+-  `sudo amazon-linux-extras install docker`
+-  `service docker start`
+-  `usermod -a -G docker ec2-user` - Add the ec2-user to the docker group so you can execute Docker commands without using sudo.
+-  logout -> login
+-  `ps -ef | grep docker` - check docker is running                                     
+-  `docker info`
+-  `docker run --rm hello-world` - run and remove image after - just test everything is fine
+
 
 
 
