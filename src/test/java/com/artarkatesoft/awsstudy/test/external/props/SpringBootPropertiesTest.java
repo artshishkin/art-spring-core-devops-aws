@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SpringCoreDevOpsApplication.class)
-@WebIntegrationTest
+@WebIntegrationTest(randomPort = true)
 @TestPropertySource("/application.properties")
 public class SpringBootPropertiesTest {
 
