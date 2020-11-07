@@ -375,7 +375,7 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
     -  login to Jenkins
     -  Spring DevOps Project ->
     -  Configure
-    -  `clean deploy  -P artifactory-art`
+    -  `clean deploy  -Partifactory_art`
     -  to have faster deploys disable tests
         -  Properties `skipTests=true`
     -  Build Now
