@@ -5,7 +5,7 @@
 
 	<groupId>com.artarkatesoft.awsstudy</groupId>
 	<artifactId>art-spring-core-devops-aws</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Spring Core DevOps AWS</name>
@@ -99,6 +99,28 @@
 			</plugin>
 		</plugins>
 	</build>
-	
 
+
+	<distributionManagement>
+<!--		<repository>-->
+<!--			<id>central-local</id>-->
+<!--			<name>1906a57e5fd3-releases</name>-->
+<!--			<url>http://localhost:8081/artifactory/libs-release-local</url>-->
+<!--		</repository>-->
+<!--		<snapshotRepository>-->
+<!--			<id>snapshots-local</id>-->
+<!--			<name>1906a57e5fd3-snapshots</name>-->
+<!--			<url>http://localhost:8081/artifactory/libs-snapshot-local</url>-->
+<!--		</snapshotRepository>-->
+		<repository>
+			<id>central-art</id>
+			<name>d0aea9433605-releases</name>
+			<url>http://art:8081/artifactory/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots-art</id>
+			<name>d0aea9433605-snapshots</name>
+			<url>http://art:8081/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>

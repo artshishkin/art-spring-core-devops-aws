@@ -336,5 +336,20 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 4.  Resolve artifacts through Artifactory with profiles
     -  `mvn clean install -P artifactory_art`
 
+#####  61. Deploying to Artifactory
+
+1.  Add `distributionManagement` block to `pom.xml`
+    -  go to `http://localhost:8081/artifactory/webapp/#/artifacts/browse/tree/General/libs-release-local` ->
+    -  Set Me Up ->
+    -  Copy `distributionManagement` for release versions
+    -  insert into `pom.xml`
+    -  do the same for `libs-release-local`
+2.  Test with release version
+    -  in `pom.xml` set version to 0.0.1
+    -  `mvn deploy`
+    
+    
+     
+
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
