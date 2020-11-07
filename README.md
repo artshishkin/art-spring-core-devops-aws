@@ -380,6 +380,35 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
         -  Properties `skipTests=true`
     -  Build Now
 
+#####  Test Artifactory and Jenkins on AWS
+
+1.  Changes Instance Type of Artifactory to `t3.medium` (4GB memory)
+2.  Increased max number of opened files
+    -  `docker run -d --ulimit nofile=90000:90000 --name artifactory -p 8081:8081 -v artifactory-data:/var/opt/jfrog/artifactory docker.bintray.io/jfrog/artifactory-oss:6.21.0`
+    -  was error
+        ```
+        ERROR: Max number of open files 1024, is too low. Cannot run Artifactory!
+        ```
+3.  Modified `httpd` settings
+    -  `ProxyPass         /  http://localhost:8081/ nocanon`
+    -  `ProxyPassReverse  /  http://localhost:8081/`
+    -  `service httpd start`
+4.  Change IP of `artifactory.shyshkin.net` in Route 53
+5.  Copied Encrypted Password and inserted into `settings.xml`
+6.  Copied `distributionManagement` section from Artifactory to `pom.xml`
+7.  Start Jenkins EC2 instance
+8.  Change `jenkins.shyshkin.net` IP in Route 53
+9.  SSH to Jenkins EC2
+    -  `service jenkins start`
+    -  `service httpd start`
+    -  `su -s /bin/bash jenkins`
+        -  `cd` - go to jenkins_home
+        -  `ls -a` or `ls -al` - see hidden files and directories
+        -  `cd .m2`
+        -  `vi settings.xml` -> paste content
+10.  Login to Jenkins
+11.  Change goal to `clean deploy -Partifactory_aws` ()
+
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg

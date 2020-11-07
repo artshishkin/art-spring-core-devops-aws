@@ -24,8 +24,17 @@
             <password>AP6f8hnVUrbrqaR5WVENZnGvDBZ</password>
             <id>snapshots-art</id>
         </server>
+        <server>
+            <username>admin</username>
+            <password>{your_password_from_artifactory}</password>
+            <id>central-aws</id>
+        </server>
+        <server>
+            <username>admin</username>
+            <password>{your_password_from_artifactory}</password>
+            <id>snapshots-aws</id>
+        </server>
     </servers>
-
     <profiles>
         <profile>
             <repositories>
@@ -96,6 +105,41 @@
                 </pluginRepository>
             </pluginRepositories>
             <id>artifactory_art</id>
+        </profile>
+        <profile>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>central-aws</id>
+                    <name>libs-release</name>
+                    <url>http://artifactory.shyshkin.net/artifactory/libs-release</url>
+                </repository>
+                <repository>
+                    <snapshots/>
+                    <id>snapshots-aws</id>
+                    <name>libs-snapshot</name>
+                    <url>http://artifactory.shyshkin.net/artifactory/libs-snapshot</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>central-aws</id>
+                    <name>libs-release</name>
+                    <url>http://artifactory.shyshkin.net/artifactory/libs-release</url>
+                </pluginRepository>
+                <pluginRepository>
+                    <snapshots/>
+                    <id>snapshots-aws</id>
+                    <name>libs-snapshot</name>
+                    <url>http://artifactory.shyshkin.net/artifactory/libs-snapshot</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>artifactory_aws</id>
         </profile>
     </profiles>
     <activeProfiles>

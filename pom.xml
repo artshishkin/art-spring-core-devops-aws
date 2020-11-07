@@ -112,15 +112,25 @@
 <!--			<name>1906a57e5fd3-snapshots</name>-->
 <!--			<url>http://localhost:8081/artifactory/libs-snapshot-local</url>-->
 <!--		</snapshotRepository>-->
+<!--		<repository>-->
+<!--			<id>central-art</id>-->
+<!--			<name>d0aea9433605-releases</name>-->
+<!--			<url>http://192.168.1.41:8081/artifactory/libs-release-local</url>-->
+<!--		</repository>-->
+<!--		<snapshotRepository>-->
+<!--			<id>snapshots-art</id>-->
+<!--			<name>d0aea9433605-snapshots</name>-->
+<!--			<url>http://192.168.1.41:8081/artifactory/libs-snapshot-local</url>-->
+<!--		</snapshotRepository>-->
 		<repository>
-			<id>central-art</id>
-			<name>d0aea9433605-releases</name>
-			<url>http://192.168.1.41:8081/artifactory/libs-release-local</url>
+			<id>central-aws</id>
+			<name>012b49c36c4d-releases</name>
+			<url>http://artifactory.shyshkin.net/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
-			<id>snapshots-art</id>
-			<name>d0aea9433605-snapshots</name>
-			<url>http://192.168.1.41:8081/artifactory/libs-snapshot-local</url>
+			<id>snapshots-aws</id>
+			<name>012b49c36c4d-snapshots</name>
+			<url>http://artifactory.shyshkin.net/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
