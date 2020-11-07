@@ -409,6 +409,27 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 10.  Login to Jenkins
 11.  Change goal to `clean deploy -Partifactory_aws` ()
 
+#####  65. Assignment - Provision Database Server
+
+- provision server (`t3.micro`)
+- add CNAME for subdomain - `proddb.shyshkin.net`
+- open firewall for port 3306 (`MYSQL/Aurora`)
+- install docker
+- start docker service
+- start database
+
+```shell script
+docker run -d --name my-container-name /
+-p 3306:3306
+-v /var/lib/mysql:/var/lib/mysql /
+-e MYSQL_ROOT_PASSWORD=spring_guru_root_pwd  /
+mysql/mysql-server:tag
+```
+-  my implementation
+```shell script
+docker run -d --name proddb -p 3306:3306 -v /var/lib/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=artarkatesoft_root_pwd  mysql/mysql-server
+```
+
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
