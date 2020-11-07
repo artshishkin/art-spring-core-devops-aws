@@ -271,6 +271,13 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
         -v /var/opt/jfrog/artifactory/logs:/var/opt/jfrog/artifactory/logs \
         -v /var/opt/jfrog/artifactory/etc:/var/opt/jfrog/artifactory/etc \
         docker.bintray.io/jfrog/artifactory-oss:latest`
+-  **OR**
+-  [Artifactory quick setup](https://jfrog.com/artifactory/install/)
+    -  `docker volume create artifactory-data`
+    -  `docker pull docker.bintray.io/jfrog/artifactory-oss:latest`
+    -  `docker run -d --name artifactory -p 8082:8082 -p 8081:8081 -v artifactory-data:/var/opt/jfrog/artifactory docker.bintray.io/jfrog/artifactory-oss:latest`
+    -  works with version `6.11.3` and above
+-  versions `6.9.0`, `6.11.3` to `6.21.0` have ability to preconfigure Maven repositories and `settings.xml`
 -  Need to update AWS Instance type of Jenkins from `t3.micro` to `t3.small`
 -  Need to update AWS Instance type of Artifactory `t3.micro` to `t3.small`
  
@@ -302,6 +309,32 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 -  Esc `:wq` - write and quit from vi
 -  `service httpd restart`
 
+#####  My implementation of Artifactory container
+
+-  [Artifactory quick setup](https://jfrog.com/artifactory/install/)
+    -  `docker volume create artifactory-data`    
+    -  `docker run -d --name artifactory -p 8081:8081 -v artifactory-data:/var/opt/jfrog/artifactory docker.bintray.io/jfrog/artifactory-oss:6.21.0`
+    
+#####  60. Resolving Artifacts through Artifactory
+
+1.  Start version 6.21.0 (has ability to preconfigure Maven repositories)
+    -  set up Maven repositories
+2.  Generate `settings.xml`
+    -  Artifacts -> Set me Up -> Generate Settings
+    -  Copy `settings.xml` content
+    -  Go to project's `pom.xml` -> right mouse button -> create `settings.xml` (in .m2 repo)
+    -  Paste settings' content
+    -  Go to `Welcome, 'username'`
+        -  Edit profile
+        -  insert password -> Unlock
+        -  Encrypted Password -> Copy it
+        -  insert into `settings.xml`
+3.  Create different profiles for:
+    -  `local` - `artifactory_local`
+    -  `art` - remote 192.168.1.41 - `artifactory_art`
+    -  `aws` - remote on AWS server - `artifactory_aws`
+4.  Resolve artifacts through Artifactory with profiles
+    -  `mvn clean install -P artifactory_art`
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
