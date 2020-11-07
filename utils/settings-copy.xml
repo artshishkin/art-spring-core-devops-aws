@@ -70,13 +70,13 @@
                     </snapshots>
                     <id>central-art</id>
                     <name>libs-release</name>
-                    <url>http://art:8081/artifactory/libs-release</url>
+                    <url>http://192.168.1.41:8081/artifactory/libs-release</url>
                 </repository>
                 <repository>
                     <snapshots/>
                     <id>snapshots-art</id>
                     <name>libs-snapshot</name>
-                    <url>http://art:8081/artifactory/libs-snapshot</url>
+                    <url>http://192.168.1.41:8081/artifactory/libs-snapshot</url>
                 </repository>
             </repositories>
             <pluginRepositories>
@@ -86,13 +86,13 @@
                     </snapshots>
                     <id>central-art</id>
                     <name>libs-release</name>
-                    <url>http://art:8081/artifactory/libs-release</url>
+                    <url>http://192.168.1.41:8081/artifactory/libs-release</url>
                 </pluginRepository>
                 <pluginRepository>
                     <snapshots/>
                     <id>snapshots-art</id>
                     <name>libs-snapshot</name>
-                    <url>http://art:8081/artifactory/libs-snapshot</url>
+                    <url>http://192.168.1.41:8081/artifactory/libs-snapshot</url>
                 </pluginRepository>
             </pluginRepositories>
             <id>artifactory_art</id>

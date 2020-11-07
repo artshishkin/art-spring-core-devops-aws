@@ -348,8 +348,38 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
     -  in `pom.xml` set version to 0.0.1
     -  `mvn deploy`
     
-    
+#####  62. Configuring Jenkins    
      
+1.  create `settings.xml` in Jenkins
+    -  `su -s /bin/bash jenkins` - login as user `jenkins`
+        -  `cd` - go to jenkins_home
+        -  `ls -a` or `ls -al` - see hidden files and directories
+        -  `cd .m2`
+        -  `vi settings.xml` -> paste content
+
+    -  **OR**
+    -  if you run docker jenkins image
+        -  `docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts`
+        -  then
+        -  `docker exec -it 8b835b099048 bash` (`docker exec -it vigorous_solomon bash`)
+        -  `cd` - go to jenkins_home
+        -  `ls -a` or `ls -al` - see hidden files and directories
+        -  `cd .m2`
+        -  `vi settings.xml` -> paste content
+            -  if `vim` absent
+            -  `exit`
+            -  `docker exec -u root -it vigorous_solomon bash`
+            -  `apt-get update`
+            -  `apt-get install vim`
+2.  Modify Jenkins settings
+    -  login to Jenkins
+    -  Spring DevOps Project ->
+    -  Configure
+    -  `clean deploy  -P artifactory-art`
+    -  to have faster deploys disable tests
+        -  Properties `skipTests=true`
+    -  Build Now
+
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg

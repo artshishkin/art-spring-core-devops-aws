@@ -115,12 +115,12 @@
 		<repository>
 			<id>central-art</id>
 			<name>d0aea9433605-releases</name>
-			<url>http://art:8081/artifactory/libs-release-local</url>
+			<url>http://192.168.1.41:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots-art</id>
 			<name>d0aea9433605-snapshots</name>
-			<url>http://art:8081/artifactory/libs-snapshot-local</url>
+			<url>http://192.168.1.41:8081/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
