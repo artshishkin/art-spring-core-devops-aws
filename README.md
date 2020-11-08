@@ -506,7 +506,44 @@ To allocate an Elastic IP and associate it with an Amazon Web Services (AWS) ins
 -  copy `full file path` of desired release (where Name of `jar` is) 
 -  ssh to spring boot EC2
 -  `which wget` (if absent `sudo yum install wget`)
--  `wget wget --user=admin --password=<EncryptedPasswordFromSettingsXML>  http://artifactory.shyshkin.net/artifactory/libs-release-local/com/artarkatesoft/awsstudy/art-spring-core-devops-aws/0.0.3/art-spring-core-devops-aws-0.0.3.jar`
+-  `wget --user=admin --password=<EncryptedPasswordFromSettingsXML>  http://artifactory.shyshkin.net/artifactory/libs-release-local/com/artarkatesoft/awsstudy/art-spring-core-devops-aws/0.0.3/art-spring-core-devops-aws-0.0.3.jar`
+
+#####  71. Running a Spring Boot Applicaiton
+
+-  if you pass parameters to spring boot app you will see these parameters by typing
+    -  `ps -ef`
+    -  this is not secure
+-  pass parameters through environment variables
+```shell script
+    export SPRING_DATASOURCE_URL='jdbc:mysql://proddb.shyshkin.net:3306/art_aws_study?serverTimezone=UTC&useSSL=false'
+    export SPRING_DATASOURCE_USERNAME=art_owner
+    export SPRING_DATASOURCE_PASSWORD=ArtPassword
+```
+-  these are  env variables of my shell. if I exit they will be gone.
+    -  `env`
+    -  `env | grep`
+-  start app
+    -  `java -jar ./art-spring-core-devops-aws-0.0.3.jar`
+    -  **and we got an error**
+```
+java.sql.SQLException: null,  message from server: "Host '13.48.31.59' is not allowed to connect to this MySQL server"
+```
+-  modified `art_owner` privileges 
+```mysql
+DROP USER 'art_owner'@'localhost';
+CREATE USER 'art_owner'@'%' identified by 'ArtPassword';
+grant all privileges on art_aws_study.* to 'art_owner'@'%';
+FLUSH PRIVILEGES;
+```
+-  started jar and got an error
+```
+2020-11-08 15:57:35.273  WARN 3360 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1146, SQLState: 42S02
+2020-11-08 15:57:35.273 ERROR 3360 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : Table 'art_aws_study.author' doesn't exist
+```
+-  modified start command to
+    -  `java -jar ./art-spring-core-devops-aws-0.0.3.jar --spring.jpa.hibernate.ddl-auto=update`
+-  go to 8080))
+
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
