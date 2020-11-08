@@ -500,7 +500,13 @@ To allocate an Elastic IP and associate it with an Amazon Web Services (AWS) ins
 4.  Right-click the newly created Elastic IP and choose Associate Address.
 5.  Choose your desired EC2 instance from the drop-down list of running instances and click Associate.
 
+#####  70. Installing Spring Boot Application
 
+-  go to `http://artifactory.shyshkin.net/`
+-  copy `full file path` of desired release (where Name of `jar` is) 
+-  ssh to spring boot EC2
+-  `which wget` (if absent `sudo yum install wget`)
+-  `wget wget --user=admin --password=<EncryptedPasswordFromSettingsXML>  http://artifactory.shyshkin.net/artifactory/libs-release-local/com/artarkatesoft/awsstudy/art-spring-core-devops-aws/0.0.3/art-spring-core-devops-aws-0.0.3.jar`
 
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
