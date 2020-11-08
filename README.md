@@ -490,5 +490,17 @@ systemctl start jenkins
     -  `docker update --restart unless-stopped artifactory`
     -  `exit`
 
+##### Association of Elastic IP with an Artifactory EC2 Instance 
+
+To allocate an Elastic IP and associate it with an Amazon Web Services (AWS) instance, do the following:
+
+1.  Open the AWS Management Console, click the EC2 link, and display the page associated with your region.
+2.  Click the Elastic IPs link in the EC2 Dashboard.
+3.  Click Allocate New Address and choose VPC or EC2 from the drop-down list, depending whether you're going to associate this IP with an instance in Amazon EC2-Virtual Private Cloud (VPC) or Amazon EC2-Classic, respectively. Click Yes, Allocate to confirm your choice.
+4.  Right-click the newly created Elastic IP and choose Associate Address.
+5.  Choose your desired EC2 instance from the drop-down list of running instances and click Associate.
+
+
+
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
