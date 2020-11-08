@@ -463,5 +463,19 @@ grant all privileges on art_aws_study.* to 'art_owner'@'localhost';
 4.  `which java`
 
 
+#####  Configure Instances to Start Automatically
+
+-  Was trying but `httpd` does not work properly  
+```shell script
+#!/bin/bash
+systemctl start httpd
+systemctl enable httpd
+systemctl start jenkins
+```
+-  made SSH to Jenkins EC2 instance and typed
+    -  `sudo chkconfig httpd on`
+    -  `sudo chkconfig jenkins on`
+
+
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
