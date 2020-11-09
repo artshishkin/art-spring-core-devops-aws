@@ -593,6 +593,8 @@ FLUSH PRIVILEGES;
         -  Enable Enhanced monitoring: `false`
 -  Create Database
 
+#####  77. Create RDS Profile for Spring Boot
+
    
 
     
