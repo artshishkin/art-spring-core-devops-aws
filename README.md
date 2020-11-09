@@ -595,7 +595,13 @@ FLUSH PRIVILEGES;
 
 #####  77. Create RDS Profile for Spring Boot
 
-   
+#####  78. Assignment Deploy Spring Boot Application using RDS Database
+
+1.  made release of a project - `0.0.4`
+2.  used encrypted credentials - `added jasypt password into command line`
+3.  used mysql-rds profile - added `-Dspring.profiles.active=mysql-rds` into command line
+4.  configured IP address of security group to be able to connect to mysql 
+5.  follow route git -> github -> jenkins -> arfifactory -> wget jar -> our service on ec2   
 
     
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
