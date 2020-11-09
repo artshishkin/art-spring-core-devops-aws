@@ -409,6 +409,8 @@ CREATE SCHEMA 'art_aws_qa2_study' DEFAULT CHARACTER SET utf8;
 10.  Login to Jenkins
 11.  Change goal to `clean deploy -Partifactory_aws` ()
 
+####  Section 7: Virtualized Cloud Deployment
+
 #####  65. Assignment - Provision Database Server
 
 - provision server (`t3.micro`)
@@ -563,6 +565,36 @@ FLUSH PRIVILEGES;
 2.  use SFG instruction from `utils/springbootservice.txt`
 3.  modify jar name
     -  `ExecStart=/bin/java -jar art-spring-core-devops-aws-0.0.3.jar`
+
+####  Section 8: Amazon RDS
+
+#####  76. Provision MySQL RDS Database on AWS
+
+-  create database
+-  MySQL
+-  Template `Dev/Test`
+-  Settings:
+    -  DB instance identifier: `mysql-sfg-study`
+    -  Master username: `art_owner_aws`
+    -  Master password: `art_password`
+-  DB instance size
+    -  Burstable classes (includes t classes)
+    -  choose `db.t3.micro`
+-  Connectivity
+    -  Public access: `Yes`
+    -  VPC security group -> Create New
+        -  New VPC security group name: `mysql-vpc-security-group`
+-  Additional configuration:
+    -  Database options
+        -  Initial database name: `art_aws_study`
+    -  Encryption
+        -  Enable encryption: `false`
+    -  Monitoring
+        -  Enable Enhanced monitoring: `false`
+-  Create Database
+
+   
+
     
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
