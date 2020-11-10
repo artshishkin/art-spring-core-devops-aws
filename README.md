@@ -683,6 +683,20 @@ FLUSH PRIVILEGES;
 5.  Restart instance
     -  stop instance
     -  start instance    
+ 
+#####  Making Route 53 automatically change IP after EC2 instance restart (Red Hat EC2 instance)
+
+1.  Steps almost the same
+2.  Difference:
+    -  need to install AWS CLI
+        -  [Install, Update, and Uninstall the AWS CLI version 1 on Linux](https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html)
+        -  **or Version 2**
+    -  first of all it needs to
+        -  [install python](https://tecadmin.net/install-python-2-7-on-centos-rhel/)
+        -  `ln -s /usr/local/bin/python2.7 /usr/bin/python`
+        -  install make
+    -  `ln -s /usr/local/bin/aws /usr/bin/aws`
+    -  `aws --version` 
     
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
