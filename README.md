@@ -723,6 +723,25 @@ FLUSH PRIVILEGES;
 -  Start docker container from Maven command
     -  `mvn clean verify docker:stop docker:build docker:start`
 
+#####  Deploying application into docker container (AWS)
+
+1.  Created new EC2 for Docker
+    -  security (ports: 2375, 8080, 80)
+2.  Installed Docker and configured
+    -  `sudo amazon-linux-extras install docker`
+    -  `service docker start`
+    -  `usermod -a -G docker ec2-user` - Add the ec2-user to the docker group so you can execute Docker commands without using sudo.
+    -  `sudo chkconfig docker on`
+    -  `sudo mkdir -p /etc/systemd/system/docker.service.d`
+    -  `sudo vi /etc/systemd/system/docker.service.d/options.conf`    
+        ```
+        # Now make it look like this and save the file when you're done:
+        [Service]
+        ExecStart=
+        ExecStart=/usr/bin/dockerd -H unix:// -H tcp://0.0.0.0:2375
+        ```
+    -  `sudo systemctl daemon-reload`
+    -  `sudo systemctl restart docker`
 
     
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
