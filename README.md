@@ -603,6 +603,86 @@ FLUSH PRIVILEGES;
 4.  configured IP address of security group to be able to connect to mysql 
 5.  follow route git -> github -> jenkins -> arfifactory -> wget jar -> our service on ec2   
 
+#####  Making Route 53 automatically change IP after EC2 instance restart (Amazon EC2 instance)
+
+1.  Follow the instructions:
+    -  [Amazon Route 53: How to automatically update IP addresses without using Elastic IPs](https://dev.to/aws/amazon-route-53-how-to-automatically-update-ip-addresses-without-using-elastic-ips-h7o)
+2.  Add instance tags:
+    -  instance -> Tags -> Manage Tags
+    -  Add tag -> `AUTO_DNS_NAME` : `proddb.shyshkin.net`
+    -  Add tag -> `AUTO_DNS_ZONE` : `Z06172933BKXLFPWKVBAG` 
+        -  from Route 53 -> 
+        -  Hosted zones -> 
+        -  shyshkin.net -> 
+        -  Hosted zone details
+        -  Hosted zone ID
+    -  Save
+3.  Create shell script to update Route 53 IP
+    -  connect to proddb EC2 instance though SSH
+    -  `sudo su`
+    -  `cd /var/lib/cloud/scripts/per-boot/`
+    -  create shell with any name: `vi auto_dns.sh`
+        ```shell script
+        #!/bin/bash
+        # Extract information about the Instance
+        INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id/)
+        AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone/)
+        MY_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4/)
+        
+        # Extract tags associated with instance
+        ZONE_TAG=$(aws ec2 describe-tags --region ${AZ::-1} --filters "Name=resource-id,Values=${INSTANCE_ID}" --query 'Tags[?Key==`AUTO_DNS_ZONE`].Value' --output text)
+        NAME_TAG=$(aws ec2 describe-tags --region ${AZ::-1} --filters "Name=resource-id,Values=${INSTANCE_ID}" --query 'Tags[?Key==`AUTO_DNS_NAME`].Value' --output text)
+        
+        # Update Route 53 Record Set based on the Name tag to the current Public IP address of the Instance
+        aws route53 change-resource-record-sets --hosted-zone-id $ZONE_TAG --change-batch '{"Changes":[{"Action":"UPSERT","ResourceRecordSet":{"Name":"'$NAME_TAG'","Type":"A","TTL":300,"ResourceRecords":[{"Value":"'$MY_IP'"}]}}]}'
+        ```
+    -  make script executable: `chmod +x auto_dns.sh`
+    -  useful commands to debug:
+        -  see logs: `cat /var/log/cloud-init.log`   
+        -  with filter: `cat /var/log/cloud-init.log | grep auto_dns`
+4.  Configure security
+    -  Sevices ->
+    -  Security, Identity, & Compliance ->
+    -  IAM ->
+    -  Policies -> create policy:
+        -  JSON:
+        ```
+       {
+           "Version": "2012-10-17",
+           "Statement": [
+               {
+                   "Effect": "Allow",
+                   "Action": "ec2:DescribeTags",
+                   "Resource": "*"
+               },
+               {
+                   "Effect": "Allow",
+                   "Action": "route53:ChangeResourceRecordSets",
+                   "Resource": "arn:aws:route53:::hostedzone/<INSERT-HOSTED-ZONE-ID>"
+               }
+           ]
+       }
+        ```
+        -  Review policy
+            -  Name: `art_dns_auto`
+            -  create policy
+    -  Roles -> create role:
+        -  Select type of trusted entity: `AWS service`
+        -  Choose a use case: `EC2`
+        -  Next: Permissions ->
+        -  enable `art_dns_auto`
+        -  Next: Tags ->
+        -  Next: Review ->
+        -  Role name: `ART_AUTO_DNS_ROLE`
+    -  Instances -> jenkins
+        -  Actions ->
+        -  Security ->
+        -  Modify IAM Role ->
+        -  Choose IAM Role: `ART_AUTO_DNS_ROLE`
+        -  Save
+5.  Restart instance
+    -  stop instance
+    -  start instance    
     
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
