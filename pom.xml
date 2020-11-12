@@ -106,6 +106,7 @@
 				<configuration>
 					<!--                    <dockerHost>unix:///var/run/docker.sock</dockerHost>-->
 					<dockerHost>http://dockerapp.shyshkin.net:2375</dockerHost>
+<!--					<dockerHost>http://192.168.1.41:2375</dockerHost>-->
 					<verbose>true</verbose>
 					<images>
 						<image>
@@ -125,6 +126,9 @@
 								<ports>
 									<post>8080:8080</post>
 								</ports>
+								<env>
+									<JASYPT_ENCRYPTOR_PASSWORD>jasypt_password</JASYPT_ENCRYPTOR_PASSWORD>
+								</env>
 							</run>
 						</image>
 					</images>
