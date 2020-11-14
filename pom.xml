@@ -129,6 +129,9 @@
 								<env>
 									<JASYPT_ENCRYPTOR_PASSWORD>jasypt_password</JASYPT_ENCRYPTOR_PASSWORD>
 								</env>
+								<restartPolicy>
+									<name>always</name>
+								</restartPolicy>
 							</run>
 						</image>
 					</images>
