@@ -769,6 +769,24 @@ FLUSH PRIVILEGES;
         -  port 3306
         -  Source: `docker-security-group`
     -  that's all;)
+
+#####  Installing docker by using UserData
+
+```shell script
+#!/bin/bash
+yum update -y
+amazon-linux-extras install -y docker
+service docker start
+usermod -a -G docker ec2-user
+chkconfig docker on
+mkdir -p /etc/systemd/system/docker.service.d
+echo "[Service]
+        ExecStart=
+        ExecStart=/usr/bin/dockerd -H unix:// -H tcp://0.0.0.0:2375" > /etc/systemd/system/docker.service.d/options.conf
+systemctl daemon-reload
+systemctl restart docker
+```
+
     
 [springver]: https://img.shields.io/badge/dynamic/xml?label=Spring%20Boot&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fartshishkin%2Fart-spring-core-devops-aws%2Fmaster%2Fpom.xml&logo=Spring&labelColor=white&color=grey
 [licence]: https://img.shields.io/github/license/artshishkin/art-spring-core-devops-aws.svg
